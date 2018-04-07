@@ -14,24 +14,8 @@
 				</thead>
 
 				<tbody>
-					<tr class="table-row">
-						<td class="number cell"><div class="num">01</div></td>
-						<td class="date cell">18.02.24</td>
-						<td class="store cell">공덕 족발 번개</td>
-						<td class="name cell">이동혁 권태형 권재원 채명준 박예기 한수민 조영은</td>
-						<td class="nb cell">
-							<div class="total">
-								<div class="total-text">총액</div>
-								<div class="total-money">280,000</div>
-							</div>
-							<div class="divide">
-								<div class="divide-text">엔빵</div>
-								<div class="divide-money">40,000</div>
-							</div>
-						</td>
-					</tr>
-					<tr class="table-row">
-						<td class="number cell"><div class="num">01</div></td>
+					<tr class="table-row" v-for="">
+						<td class="number cell"><div class="num">1</div></td>
 						<td class="date cell">18.02.24</td>
 						<td class="store cell">공덕 족발 번개</td>
 						<td class="name cell">이동혁 권태형 권재원 채명준 박예기 한수민 조영은</td>
@@ -53,7 +37,30 @@
 </template>
 
 <script type="text/javascript">
-	
+export default {
+	created() {
+		var vm = this
+		this.$axios.get('http://springkjw.pythonanywhere.com/api/partys/', 
+		 	{
+      headers: { 
+      	'Authorization': 'PROJECT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InB5Zzk3MTUiLCJleHAiOjE1NTQ2MjY0NzUsImVtYWlsIjoicHlnOTcxNUBnbWFpbC5jb20iLCJvcmlnX2lhdCI6MTUyMzA5MDQ3NX0.SEB0Awa-Ij0-xmOFm3D25YRgRqNu5BeNnaOvWUKUoHQ',
+      	'Content-Type': 'application/json'
+      	}
+    	})
+      .then((response) => {
+        console.log(reponse.data)
+      })
+      .catch((ex) => {
+        console.log('ERROR: ' + ex)
+      })
+	},
+	data: function () {
+		return {
+			idx: 1,
+			result: null
+		}
+	}
+}
 
 </script>
 
@@ -96,8 +103,9 @@
 
 	#notice-table {
 		/*padding-top: 62px;*/
-		padding-left: 60px;
+		margin-left: 60px;
 		padding-right: 59px;
+		border-collapse: collapse;
 	}
 
 	#table-header {
@@ -193,4 +201,8 @@
 		color: #7250d1;
 		font-weight: 500;
 	}
+
+/*	td {
+		border-bottom: 1px solid #ccc;
+	}*/
 </style>

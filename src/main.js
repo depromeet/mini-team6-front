@@ -10,6 +10,8 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.use(VueRouter)
+
+Vue.prototype.$axios = axios
 // Vue.use(VusAxios)
 
 /* eslint-disable no-new */

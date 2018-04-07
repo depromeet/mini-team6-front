@@ -10,8 +10,8 @@
 
                     <div class="modal-body">
                       <label for="newDate">Date</label>
-                      <div id="blank"></div>
                       <input type="text" id="newDate" v-model="newDate">
+                      <input type="text" id="blank">
                       <br />
 
                       <label for="newTitle">Title</label>
@@ -233,12 +233,6 @@ label {
   top: 2px;
 }
 
-#blank {
-  float: left;
-  height: 40px;
-  width: 275px;
-}
-
 #money-box {
   width: 113px;
   height: 40px;
@@ -247,6 +241,12 @@ label {
 
 .modal-body input {
   font-family: NanumSquareOTFR;
+}
+
+#blank {
+  width: 263px;
+  border: 0;
+  outline: none;
 }
 
 </style>
