@@ -10,9 +10,8 @@
 import Profile from './Profile.vue'
 import Money from './Money.vue'
 import List from './List.vue'
-import InputPop from './InputPop.vue'
 
 export default {
-    components: { Profile, Money, List, InputPop }
+    components: { Profile, Money, List}
 }
 </script>
