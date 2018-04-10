@@ -43,7 +43,7 @@ export default {
 		this.$axios.get('http://springkjw.pythonanywhere.com/api/partys/', 
 		 	{
       headers: { 
-      	'Authorization': 'PROJECT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJ1c2VybmFtZSI6InB5Zzk3MTUiLCJleHAiOjE1NTQ2MjY0NzUsImVtYWlsIjoicHlnOTcxNUBnbWFpbC5jb20iLCJvcmlnX2lhdCI6MTUyMzA5MDQ3NX0.SEB0Awa-Ij0-xmOFm3D25YRgRqNu5BeNnaOvWUKUoHQ',
+      	'Authorization': 'PROJECT token',
       	'Content-Type': 'application/json'
       	}
     	})

@@ -3,6 +3,7 @@
     <profile></profile>
     <money></money>
     <list></list>
+    <img src="../assets/footer.png"/>
 </div>
 </template>
 
