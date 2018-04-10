@@ -14,19 +14,19 @@
 				</thead>
 
 				<tbody>
-					<tr class="table-row" v-for="">
-						<td class="number cell"><div class="num">1</div></td>
-						<td class="date cell">18.02.24</td>
-						<td class="store cell">공덕 족발 번개</td>
-						<td class="name cell">이동혁 권태형 권재원 채명준 박예기 한수민 조영은</td>
+					<tr class="table-row" v-for="(d, index) in this.dataset" v-bind:key="index">
+						<td class="number cell"><div class="num">{{ index + 1 }}</div></td>
+						<td class="date cell">{{ d.date }}</td>
+						<td class="store cell">{{ d.store }}</td>
+						<td class="name cell">{{ d.name }}</td>
 						<td class="nb cell">
 							<div class="total">
 								<div class="total-text">총액</div>
-								<div class="total-money">280,000</div>
+								<div class="total-money">{{ d.total }}</div>
 							</div>
 							<div class="divide">
 								<div class="divide-text">엔빵</div>
-								<div class="divide-money">40,000</div>
+								<div class="divide-money">{{ d.total/d.count }}</div>
 							</div>
 						</td>
 					</tr>
@@ -37,29 +37,60 @@
 </template>
 
 <script type="text/javascript">
+import eventBus from './EventBus.vue';
+
 export default {
 	created() {
-		var vm = this
-		this.$axios.get('http://springkjw.pythonanywhere.com/api/partys/', 
-		 	{
-      headers: { 
-      	'Authorization': 'PROJECT token',
-      	'Content-Type': 'application/json'
-      	}
-    	})
-      .then((response) => {
-        console.log(reponse.data)
-      })
-      .catch((ex) => {
-        console.log('ERROR: ' + ex)
-      })
+		// var vm = this
+		// this.$axios.get('http://springkjw.pythonanywhere.com/api/partys/', 
+		// 	 	{
+	 //      headers: { 
+	 //      	'Authorization': 'PROJECT token',
+	 //      	'Content-Type': 'application/json'
+	 //      	}
+	 //    	})
+	 //      .then((response) => {
+	 //        console.log(reponse.data)
+	 //      })
+	 //      .catch((ex) => {
+	 //        console.log('ERROR: ' + ex)
+	 //      })
+     eventBus.$on('add-list', this.addList)
 	},
 	data: function () {
 		return {
 			idx: 1,
-			result: null
+			result: null,
+            dataset: [
+                { date: "18.02.24", 
+                  store: "공덕 족발 번개", 
+                  name: "이동혁 권태형 권재원 채명준 박예기 한수민 조영은", 
+                  count: 7, 
+                  total: 280000 },
+                { date: "18.04.07", 
+                  store: "서초 양꼬치", 
+                  name: "김동영 한영수 정현아 김소은", 
+                  count: 4, 
+                  total: 160000 },
+                // {},
+                // {},
+                // {}
+            ]
 		}
-	}
+	},
+    methods: {
+        addList: function (date, store, name, count, total) {
+            if (store !== '') {
+                this.dataset.push({
+                    date: date,
+                    store: store, 
+                    name: name,
+                    count: count,
+                    total: total
+                })
+            }
+        }
+    }
 }
 
 </script>
@@ -68,7 +99,6 @@ export default {
 	#notice {
 	  width: 1920px;
 	  height: 1720px;
-	  /*padding-left: 449px;*/
 	  mix-blend-mode: undefined;
 	  background-color: #f6f6f6;
 	  border: solid 0.5px #f6f6f6;

@@ -11,7 +11,7 @@
                     <div class="modal-body">
                       <label for="newDate">Date</label>
                       <input type="text" id="newDate" v-model="newDate">
-                      <input type="text" id="blank">
+                      <input type="text" id="blank" disabled>
                       <br />
 
                       <label for="newTitle">Title</label>
@@ -21,17 +21,17 @@
                       <input type="text" id="newMember" placeholder="  모임에 함께한 멤버들을 적어주세요." v-model="newMember"><br />
 
                       <label for="newMoney">Money</label>
-                      <input type="text" id="newMoney" placeholder="  총금액" v-model="newMoney">
+                      <input type="number" id="newMoney" placeholder="  총금액" v-model="newMoney">
                       <img id="divide-icon" src="../assets/icon_5.png">
-                      <input type="text" id="newMemberCount" placeholder="  멤버수" v-model="newMemberCount">
+                      <input type="number" id="newMemberCount" placeholder="  멤버수" v-model="newMemberCount">
                       <span>=</span>
                       <!-- <div id="money-box"></div> -->
-                      <input type="text" id="won">
+                      <input type="number" id="won" v-bind:value="divided">
                       <span>원</span>
                     </div>
 
                     <div class="modal-footer">
-                        <button class="modal-default-button" @click="$emit('close'); addTopic()">
+                        <button class="modal-default-button" @click="$emit('close'); addList()">
                           <div id="button-text">등록하기</div>
                         </button>
                     </div>
@@ -50,14 +50,17 @@ export default {
     return { newDate: '',
       newTitle: '',
       newMember:'',
-      newMoney:'',
-      newMemberCount:''
+      newMoney: null,
+      newMemberCount: null,
+      divided: null
      }
   },
+  created() {
+    this.divided = this.newMoney / this.newMemberCount;
+  },
   methods: {
-    addTopic: function () {
-      eventBus.$emit('add-topic', this.newtopic)
-      this.newtopic = ''
+    addList: function () {
+      eventBus.$emit('add-list', this.newDate, this.newTitle, this.newMember, this.newMemberCount, this.newMoney )
     }
   }
 }
